@@ -103,6 +103,18 @@ tbody tr{cursor:pointer}
 </style>
 </head>
 <body>
+<div id="gate" style="position:fixed;inset:0;z-index:9999;background:#f4f1ea;display:flex;align-items:center;justify-content:center;font-family:sans-serif">
+<form id="gateForm" style="background:#fff;padding:28px 32px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.12);text-align:center;min-width:260px">
+<div style="font-size:18px;font-weight:600;margin-bottom:12px">新北市熱健康風險互動地圖</div>
+<div style="font-size:14px;color:#555;margin-bottom:12px">請輸入密碼</div>
+<input id="gatePw" type="password" autocomplete="off" style="font-size:16px;padding:8px 10px;border:1px solid #bbb;border-radius:8px;width:180px;text-align:center">
+<div><button type="submit" style="margin-top:12px;font-size:15px;padding:8px 22px;border:0;border-radius:8px;background:#1f3a5f;color:#fff;cursor:pointer">進入</button></div>
+<div id="gateMsg" style="color:#b00020;font-size:13px;height:18px;margin-top:8px"></div>
+</form></div>
+<script>(function(){var H="a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3";var g=document.getElementById("gate");try{if(sessionStorage.getItem("atlasOK")==="1"){g.remove();return}}catch(e){}
+async function sha(t){var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("")}
+document.getElementById("gateForm").addEventListener("submit",async function(ev){ev.preventDefault();var v=document.getElementById("gatePw").value;if(await sha(v)===H){try{sessionStorage.setItem("atlasOK","1")}catch(e){}g.remove()}else{document.getElementById("gateMsg").textContent="密碼錯誤";document.getElementById("gatePw").value=""}});
+document.getElementById("gatePw").focus();})();</script>
 <div class="wrap">
 <header>
   <div class="eyebrow">互動資料 · 新北市 29 區 · 21 個 GCM 集合</div>
